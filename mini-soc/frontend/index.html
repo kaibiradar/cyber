@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini SOC - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Chart.js library for displaying graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>🛡️ Mini SOC Dashboard</h1>
+            <p>Log Monitoring and Alert System</p>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <div class="container">
+        
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <h2>📁 Log File Manager</h2>
+            <div class="controls">
+                <!-- Upload Log File -->
+                <div class="control-group">
+                    <label for="fileUpload">Upload Log File:</label>
+                    <input type="file" id="fileUpload" accept=".txt,.log">
+                    <button onclick="uploadLogFile()" class="btn btn-primary">Upload & Analyze</button>
+                </div>
+                
+                <!-- Analyze Existing Log -->
+                <div class="control-group">
+                    <label for="logFileSelect">Or Analyze Existing Log:</label>
+                    <select id="logFileSelect">
+                        <option value="">Select a log file...</option>
+                    </select>
+                    <button onclick="analyzeSelectedLog()" class="btn btn-success">Analyze</button>
+                </div>
+                
+                <!-- Refresh and Clear Buttons -->
+                <div class="control-group">
+                    <button onclick="loadDashboard()" class="btn btn-info">🔄 Refresh Dashboard</button>
+                    <button onclick="clearAllAlerts()" class="btn btn-danger">🗑️ Clear All Alerts</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">🚨</div>
+                <div class="stat-info">
+                    <h3>Total Alerts</h3>
+                    <p id="totalAlerts" class="stat-number">0</p>
+                </div>
+            </div>
+            
+            <div class="stat-card critical">
+                <div class="stat-icon">🔴</div>
+                <div class="stat-info">
+                    <h3>Critical</h3>
+                    <p id="criticalAlerts" class="stat-number">0</p>
+                </div>
+            </div>
+            
+            <div class="stat-card high">
+                <div class="stat-icon">🟠</div>
+                <div class="stat-info">
+                    <h3>High</h3>
+                    <p id="highAlerts" class="stat-number">0</p>
+                </div>
+            </div>
+            
+            <div class="stat-card medium">
+                <div class="stat-icon">🟡</div>
+                <div class="stat-info">
+                    <h3>Medium</h3>
+                    <p id="mediumAlerts" class="stat-number">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Types Chart -->
+        <div class="chart-container">
+            <h2>📊 Attacks Over Time</h2>
+            <canvas id="alertsChart"></canvas>
+        </div>
+
+        <!-- Alerts Table -->
+        <div class="alerts-table-container">
+            <h2>🔍 Recent Alerts</h2>
+            <div class="table-wrapper">
+                <table id="alertsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Timestamp</th>
+                            <th>Alert Type</th>
+                            <th>Severity</th>
+                            <th>IP Address</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="alertsTableBody">
+                        <tr>
+                            <td colspan="6" class="no-alerts">No alerts detected yet. Upload or analyze a log file to get started.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Mini SOC - Log Monitoring and Alert System | Blue Team Cybersecurity Project</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
